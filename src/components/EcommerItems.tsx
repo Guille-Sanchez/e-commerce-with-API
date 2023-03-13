@@ -13,9 +13,12 @@ export const EcommerItems = ({ sortBy }: Props): JSX.Element => {
     const value = [...eCommerceItems] // Get value from API
 
     setEcommerceProducts(() =>
-      [...value.filter((product) => {
-        return sortBy.category === 'All' ? true : product.category === sortBy.category
-      })]
+      value.filter((product) => {
+        return (
+          ((sortBy.category === 'All') ? true : (product.category === sortBy.category)) &&
+            product.price >= sortBy.minPrice
+        )
+      })
     )
   }
 
@@ -28,7 +31,7 @@ export const EcommerItems = ({ sortBy }: Props): JSX.Element => {
     return () => {
       subscribed = false
     }
-  }, [sortBy])
+  }, [sortBy.category, sortBy.minPrice])
 
   return (
     <div className='grid justify-center'>

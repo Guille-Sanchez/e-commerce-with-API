@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { CategoryForm } from './components/CategoryForm'
 import { EcommerItems } from './components/EcommerItems'
+import { MinPriceForm } from './components/MinPriceForm'
 
 function App (): JSX.Element {
   const [sortBy, setSortBy] = useState({
@@ -9,22 +10,10 @@ function App (): JSX.Element {
   })
 
   return (
-    <div className='bg-indigo-900 w-full h-full font'>
+    <div className='bg-indigo-900 min-w-full min-h-full font'>
       <h1 className='bg-white pt-5 pb-5 text-3xl font-extrabold'>E-commerce</h1>
-      <CategoryForm setSortBy={setSortBy}/>
-      <div>
-        <form>
-          <label htmlFor="range">Select minimum Price:</label>
-          <input type="range" id='range' min={0} max={1000}
-             onChange={(e) => {
-               setSortBy((prev) => {
-                 return ({ ...prev, minPrice: +e.target.value })
-               })
-             }}
-            />
-          <span>Value: {sortBy.minPrice}</span>
-        </form>
-      </div>
+      <CategoryForm setSortBy={setSortBy} />
+      <MinPriceForm sortBy={sortBy} setSortBy={setSortBy} />
       <EcommerItems sortBy={sortBy} />
     </div>
   )
