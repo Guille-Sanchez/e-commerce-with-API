@@ -1,16 +1,19 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import IconCart from '../assets/icons'
+import { SortByContext } from '../context/SortContext'
 import { eCommerceItems } from '../mockups/eCommerceItems'
-import { type sortByInterface } from '../types.d'
+import { type eCommerceItemsType, type sortByInterface } from '../types.d'
 
 interface Props {
   sortBy: sortByInterface
 }
-export const EcommerItems = ({ sortBy }: Props): JSX.Element => {
-  const [eCommerceProducts, setEcommerceProducts] = useState(eCommerceItems)
 
-  const sortProducts = (sortBy: sortByInterface): void => {
-    const value = [...eCommerceItems] // Get value from API
+export const EcommerItems = (): JSX.Element => {
+  const { sortBy } = useContext(SortByContext)
+  const [eCommerceProducts, setEcommerceProducts] = useState<eCommerceItemsType | null>(null)
+
+  const sortProducts = ({ sortBy }: Props): void => {
+    const value = [...eCommerceItems]
 
     setEcommerceProducts(() =>
       value.filter((product) => {
@@ -26,12 +29,18 @@ export const EcommerItems = ({ sortBy }: Props): JSX.Element => {
     let subscribed = true
 
     if (subscribed) {
-      sortProducts(sortBy)
+      sortProducts({ sortBy })
     }
     return () => {
       subscribed = false
     }
   }, [sortBy.category, sortBy.minPrice])
+
+  if (eCommerceProducts == null) {
+    return (
+    <p>loading</p>
+    )
+  }
 
   return (
     <div className='grid justify-center'>

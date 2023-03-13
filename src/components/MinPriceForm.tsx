@@ -1,11 +1,9 @@
-import { type setSortByType, type sortByInterface } from '../types.d'
+import { useContext } from 'react'
+import { SortByContext } from '../context/SortContext'
 
-interface Props {
-  setSortBy: setSortByType
-  sortBy: sortByInterface
-}
+export const MinPriceForm = (): JSX.Element => {
+  const { sortBy, setSortBy } = useContext(SortByContext)
 
-export const MinPriceForm = ({ setSortBy, sortBy }: Props): JSX.Element => {
   return (
     <div>
         <form>

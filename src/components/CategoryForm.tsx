@@ -1,10 +1,8 @@
-import { useId } from 'react'
-import { type setSortByType } from '../types.d'
+import { useContext, useId } from 'react'
+import { SortByContext } from '../context/SortContext'
 
-interface Props {
-  setSortBy: setSortByType
-}
-export const CategoryForm = ({ setSortBy }: Props): JSX.Element => {
+export const CategoryForm = (): JSX.Element => {
+  const { setSortBy } = useContext(SortByContext)
   const categories = [
     'All',
     'electronics',
