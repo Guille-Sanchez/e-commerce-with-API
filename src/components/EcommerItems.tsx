@@ -1,40 +1,10 @@
-import { useContext, useEffect, useState } from 'react'
 import IconCart from '../assets/icons'
-import { SortByContext } from '../context/SortContext'
-import { eCommerceItems } from '../mockups/eCommerceItems'
-import { type eCommerceItemsType, type sortByInterface } from '../types.d'
-
-interface Props {
-  sortBy: sortByInterface
-}
+import { useProducts } from '../hook/useProducts'
+import { useSorting } from '../hook/useSorting'
 
 export const EcommerItems = (): JSX.Element => {
-  const { sortBy } = useContext(SortByContext)
-  const [eCommerceProducts, setEcommerceProducts] = useState<eCommerceItemsType | null>(null)
-
-  const sortProducts = ({ sortBy }: Props): void => {
-    const value = [...eCommerceItems]
-
-    setEcommerceProducts(() =>
-      value.filter((product) => {
-        return (
-          ((sortBy.category === 'All') ? true : (product.category === sortBy.category)) &&
-            product.price >= sortBy.minPrice
-        )
-      })
-    )
-  }
-
-  useEffect(() => {
-    let subscribed = true
-
-    if (subscribed) {
-      sortProducts({ sortBy })
-    }
-    return () => {
-      subscribed = false
-    }
-  }, [sortBy.category, sortBy.minPrice])
+  const { eCommerceProducts, setEcommerceProducts } = useProducts()
+  useSorting({ eCommerceProducts, setEcommerceProducts })
 
   if (eCommerceProducts == null) {
     return (

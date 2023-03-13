@@ -1,17 +1,7 @@
 import { createContext, useState } from 'react'
+import { type SortContextProviderProps, type sortByInterfaceContext } from '../types.d'
 
-export interface sortByInterface {
-  sortBy: {
-    category: string
-    minPrice: number
-  }
-  setSortBy: React.Dispatch<React.SetStateAction<{
-    category: string
-    minPrice: number
-  }>>
-}
-
-export const SortByContext = createContext<sortByInterface>({
+export const SortByContext = createContext<sortByInterfaceContext>({
   sortBy: {
     category: 'All',
     minPrice: 0
@@ -22,11 +12,7 @@ export const SortByContext = createContext<sortByInterface>({
   }>) => {}
 })
 
-interface Props {
-  children: React.ReactNode
-}
-
-export const SortContextProvider = ({ children }: Props): JSX.Element => {
+export const SortContextProvider = ({ children }: SortContextProviderProps): JSX.Element => {
   const [sortBy, setSortBy] = useState({
     category: 'All',
     minPrice: 0
