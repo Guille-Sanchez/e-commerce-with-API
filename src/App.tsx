@@ -1,18 +1,23 @@
 import { CategoryForm } from './components/CategoryForm'
 import { EcommerItems } from './components/EcommerItems'
 import { MinPriceForm } from './components/MinPriceForm'
+import { Navbar } from './components/Navbar'
+import { CartContextProvider } from './context/CartContext'
 import { SortContextProvider } from './context/SortContext'
 
 function App (): JSX.Element {
   return (
-    <div className='bg-indigo-900 min-w-full min-h-full font'>
-      <h1 className='bg-white pt-5 pb-5 text-3xl font-extrabold'>E-commerce</h1>
-      <SortContextProvider>
-        <CategoryForm />
-        <MinPriceForm />
-        <EcommerItems />
-      </SortContextProvider>
-    </div>
+    <CartContextProvider>
+      <Navbar />
+
+      <main className='bg-indigo-900 min-w-full min-h-full font'>
+        <SortContextProvider>
+          <CategoryForm />
+          <MinPriceForm />
+          <EcommerItems />
+        </SortContextProvider>
+      </main>
+    </CartContextProvider>
   )
 }
 

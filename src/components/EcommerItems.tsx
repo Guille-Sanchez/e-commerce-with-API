@@ -1,5 +1,5 @@
-import { useProducts } from '../hook/useProducts'
-import { useSorting } from '../hook/useSorting'
+import { useProducts } from '../hooks/useProducts'
+import { useSorting } from '../hooks/useSorting'
 import { ProductCard } from './ProductCard'
 
 export const EcommerItems = (): JSX.Element => {

@@ -6,10 +6,11 @@ export const SortByContext = createContext<sortByInterfaceContext>({
     category: 'All',
     minPrice: 0
   },
-  setSortBy: (_value: React.SetStateAction<{
+  setSortBy: (prev) => { return ({ ...prev }) }
+  /* (_value: React.SetStateAction<{
     category: string
     minPrice: number
-  }>) => {}
+  }>) => {} */
 })
 
 export const SortContextProvider = ({ children }: SortContextProviderProps): JSX.Element => {
