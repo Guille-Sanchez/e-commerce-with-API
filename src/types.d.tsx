@@ -39,3 +39,22 @@ export interface sortProductsProps {
 export interface SortContextProviderProps {
   children: React.ReactNode
 }
+
+export interface handleOnClickCartInterface {
+  clickValue: number
+  product: cartInterface
+  index: number
+}
+
+export interface cartInterface {
+  id: number
+  image: string
+  price: number
+  quantity: number
+  title: string
+}
+
+export interface cartInterfaceContext {
+  cart: cartInterface[]
+  setCart: React.Dispatch<React.SetStateAction<cartInterface[]>>
+}

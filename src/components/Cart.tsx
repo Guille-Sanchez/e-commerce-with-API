@@ -1,6 +1,7 @@
 import { CartContext } from '../context/CartContext'
 import { useContext } from 'react'
 import { IconAdd, IconCartX, IconSubtractLine } from '../assets/icons'
+import { type handleOnClickCartInterface } from '../types.d'
 
 interface Props {
   setShowCart: React.Dispatch<React.SetStateAction<boolean>>
@@ -8,6 +9,16 @@ interface Props {
 
 export const Cart = ({ setShowCart }: Props): JSX.Element => {
   const { cart, setCart } = useContext(CartContext)
+
+  const handleOnClick = ({ clickValue, product, index }: handleOnClickCartInterface): void => {
+    const value = product.quantity + clickValue
+    if (value < 0) return
+    const currentProduct = { ...product, quantity: Number(value) }
+    cart.splice((index + 1), 1, { ...currentProduct })
+    setCart(() => {
+      return ([...cart])
+    })
+  }
 
   return (
     <div className='absolute inset-0 top-20 bg-black bg-opacity-30 z-10'>
@@ -35,9 +46,8 @@ export const Cart = ({ setShowCart }: Props): JSX.Element => {
                         <img
                           src={product.image}
                           alt={product.title}
-                          className='w-5 object-contain'
+                          className='w-7 object-contain'
                           />
-                          <IconCartX />
                       </div>
                     </th>
                     <th>
@@ -46,23 +56,30 @@ export const Cart = ({ setShowCart }: Props): JSX.Element => {
                     <th>
                       <form>
                         <div>
-                          <button><IconSubtractLine/></button>
+                          <button onClick={(e) => {
+                            e.preventDefault()
+                            const clickValue: number = -1
+                            handleOnClick({ clickValue, product, index })
+                          }}>
+                            <IconSubtractLine/>
+                          </button>
                             <input
-                              onChange={(event) => {
-                                const value = event.currentTarget.value
-                                const currentProduct = { ...product, quantity: Number(value) }
-                                cart.splice((index + 1), 1, { ...currentProduct })
-                                setCart(() => {
-                                  return ([...cart])
-                                })
-                              }}
                               value={product.quantity}
-                              className='w-5'/>
-                          <button><IconAdd/></button>
+                              className='w-5'
+                              readOnly
+                              />
+
+                          <button onClick={(e) => {
+                            e.preventDefault()
+                            const clickValue: number = 1
+                            handleOnClick({ clickValue, product, index })
+                          }}>
+                            <IconAdd/>
+                          </button>
                         </div>
                       </form>
                     </th>
-                    <th>$ {product.quantity * product.price}</th>
+                    <th>$ {(product.quantity * product.price).toFixed(2)}</th>
                   </tr>
                 )
               })

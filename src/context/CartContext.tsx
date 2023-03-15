@@ -1,18 +1,5 @@
 import { createContext, useState } from 'react'
-import { type SortContextProviderProps } from '../types.d'
-
-export interface cartInterface {
-  id: number
-  image: string
-  price: number
-  quantity: number
-  title: string
-}
-
-interface cartInterfaceContext {
-  cart: cartInterface[]
-  setCart: React.Dispatch<React.SetStateAction<cartInterface[]>>
-}
+import { type cartInterfaceContext, type SortContextProviderProps } from '../types.d'
 
 export const CartContext = createContext<cartInterfaceContext>({
   cart: [{
