@@ -26,7 +26,7 @@ export const Cart = ({ setShowCart }: Props): JSX.Element => {
           <IconCartX />
         </button>
       <div className='mr-5 ml-5'>
-        <table className='table-fixed bg-white w-full rounded-md'>
+        <table className='table-fixed bg-white w-full rounded-t-md'>
 
           <thead className='pt-50'>
             <tr>
@@ -85,6 +85,19 @@ export const Cart = ({ setShowCart }: Props): JSX.Element => {
               })
             }
           </tbody>
+        </table>
+        <hr />
+        <table className='table-fixed bg-white w-full rounded-b-md'>
+          <tr>
+            <th>Total amount to pay:</th>
+            <th className='text-right pr-5'>$
+              {
+                ([...cart].splice(1).map((product) => {
+                  return (product.price * product.quantity)
+                })).reduce((accumulator, currentValue) => (accumulator += currentValue), 0).toFixed(2)
+              }
+            </th>
+            </tr>
         </table>
       </div>
     </div>
