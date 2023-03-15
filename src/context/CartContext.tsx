@@ -22,7 +22,7 @@ export const CartContext = createContext<cartInterfaceContext>({
     quantity: 0,
     title: ''
   }],
-  setCart: (prev) => { return ([{ ...prev }]) }
+  setCart: () => {}
 })
 
 export const CartContextProvider = ({ children }: SortContextProviderProps): JSX.Element => {

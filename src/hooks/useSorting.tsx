@@ -17,7 +17,7 @@ export const useSorting = ({ eCommerceProducts, setEcommerceProducts }: eCommerc
         setOriginalProducts(() => [...eCommerceProducts])
       }
 
-      sortProducts({ sortBy, setEcommerceProducts, originalProducts })
+      sortProducts({ sortBy, setEcommerceProducts, originalProducts }) // This must be async, or in first render it does not work
     }
     return () => {
       subscribed = false
