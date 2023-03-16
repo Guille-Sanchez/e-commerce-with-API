@@ -16,8 +16,10 @@ function App (): JSX.Element {
 
       <main className='bg-indigo-900 min-w-full min-h-full font'>
         <SortContextProvider>
-          <CategoryForm />
-          <MinPriceForm />
+          <div className='pr-5 pl-5'>
+            <CategoryForm />
+            <MinPriceForm />
+          </div>
           <EcommerItems />
         </SortContextProvider>
       </main>

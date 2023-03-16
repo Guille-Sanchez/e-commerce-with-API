@@ -1,10 +1,11 @@
+import { eCommerceItems } from '../mockups/eCommerceItems'
 import { type sortProductsProps } from '../types.d'
 
 export const sortProducts = ({ sortBy, setEcommerceProducts, originalProducts }: sortProductsProps): void => {
-  if (originalProducts == null) return
+  const displayProducts = originalProducts != null ? originalProducts : eCommerceItems
 
   setEcommerceProducts(() =>
-    originalProducts.filter((product) => {
+    displayProducts.filter((product) => {
       return (
         ((sortBy.category === 'All') ? true : (product.category === sortBy.category)) &&
           product.price >= sortBy.minPrice

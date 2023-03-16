@@ -13,8 +13,8 @@ export const CategoryForm = (): JSX.Element => {
   const categoriesId = useId()
 
   return (
-    <div className='flex w-full justify-end pr-5'>
-      <form className='flex gap-4 items-center justify-center'>
+    <div className='flex w-full justify-end'>
+      <form className='grid grid-cols-2 gap-4 items-center justify-center'>
         <label htmlFor="sort-by-category"
           className='text-slate-200 self-end font-bold p-0 m-0'
         >
