@@ -12,7 +12,7 @@ function App (): JSX.Element {
   return (
     <CartContextProvider>
       <Navbar setShowCart={setShowCart} showCart={showCart}/>
-      {showCart && <Cart setShowCart={setShowCart}/>}
+      {showCart && <Cart />}
 
       <main className='bg-indigo-900 min-w-full min-h-full font'>
         <SortContextProvider>

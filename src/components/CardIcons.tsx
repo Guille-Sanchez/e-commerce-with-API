@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { IconCart, IconCartCheckFill } from '../assets/icons'
 import { CartContext } from '../context/CartContext'
 import { type eCommerceItemInterface } from '../types.d'
@@ -11,8 +11,33 @@ export const CardIcons = ({ item }: itemProps): JSX.Element => {
   const { cart, setCart } = useContext(CartContext)
   const [product, setProduct] = useState({
     isNotSelected: true,
-    id: 0
+    id: item.id
   })
+
+  useEffect(() => {
+    let subscribed = true
+    if (subscribed) {
+      const cartIdsArray: number[] = []
+      // If the items being displayed changed, it checks the icons to place the correct ones
+      cart.forEach((productInCart) => {
+        cartIdsArray.push(productInCart.id)
+        if (productInCart.id === product.id) {
+          setProduct((prev) => { return ({ ...prev, isNotSelected: false }) })
+        }
+      })
+
+      if (!cartIdsArray.includes(product.id)) {
+        console.log(cartIdsArray)
+        setProduct((prev) => { return ({ ...prev, isNotSelected: true }) })
+      } else {
+        setProduct((prev) => { return ({ ...prev, isNotSelected: false }) })
+      }
+    }
+
+    return () => {
+      subscribed = false
+    }
+  }, [cart])
 
   return (
     <>
@@ -36,13 +61,13 @@ export const CardIcons = ({ item }: itemProps): JSX.Element => {
                   ]
                 )
               })
-              setProduct(() => { return { isNotSelected: false, id: item.id } })
+              setProduct((prev) => { return { ...prev, isNotSelected: false } })
             }}
           >
             <IconCart viewBox={'0 0 16 16'} width={'25px'} height={'25px'}/>
           </button>
 
-        : <button // removes item from card
+        : <button // removes product from card
             className='hover:opacity-50'
             onClick={() => {
               const currentCart = [{
@@ -59,11 +84,11 @@ export const CardIcons = ({ item }: itemProps): JSX.Element => {
                 currentCart.push(prop)
               })
               setCart(() => { return ([...currentCart]) })
-              setProduct((prev) => { return { ...prev, isNotSelected: true, positionInCart: 0 } })
+              setProduct((prev) => { return { ...prev, isNotSelected: true } })
             }}
           >
             <IconCartCheckFill viewBox={'0 0 16 16'} width={'25px'} height={'25px'}/>
-          </button>
+        </button>
     }
     </>
   )
