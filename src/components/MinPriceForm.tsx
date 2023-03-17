@@ -5,8 +5,8 @@ export const MinPriceForm = (): JSX.Element => {
   const { sortBy, setSortBy } = useContext(SortByContext)
 
   return (
-    <div>
-      <form className='min-w-full grid grid-cols-3 items-center justify-center gap-2 pt-5'>
+    <div className='min-w-full flex justify-center'>
+      <form className='flex items-center justify-between gap-2 pt-5'>
         <label className='text-slate-200 font-semibold self-start' htmlFor="range">
           Min. price:
         </label>
@@ -14,6 +14,7 @@ export const MinPriceForm = (): JSX.Element => {
           <input
             type="range"
             id='range'
+            className='max-w-[150px]'
             min={0}
             max={1000}
             onChange={(e) => {

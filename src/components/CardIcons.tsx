@@ -27,7 +27,6 @@ export const CardIcons = ({ item }: itemProps): JSX.Element => {
       })
 
       if (!cartIdsArray.includes(product.id)) {
-        console.log(cartIdsArray)
         setProduct((prev) => { return ({ ...prev, isNotSelected: true }) })
       } else {
         setProduct((prev) => { return ({ ...prev, isNotSelected: false }) })

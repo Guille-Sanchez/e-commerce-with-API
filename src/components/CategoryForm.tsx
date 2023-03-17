@@ -13,8 +13,8 @@ export const CategoryForm = (): JSX.Element => {
   const categoriesId = useId()
 
   return (
-    <div className='flex w-full justify-end'>
-      <form className='grid grid-cols-2 gap-4 items-center justify-center'>
+    <div className='flex w-full justify-center'>
+      <form className='flex gap-4 items-center justify-center'>
         <label htmlFor="sort-by-category"
           className='text-slate-200 self-end font-bold p-0 m-0'
         >
@@ -24,7 +24,7 @@ export const CategoryForm = (): JSX.Element => {
         <select
           name="Category"
           id='sort-by-category'
-          className='mt-4 pl-2 rounded-md'
+          className='mt-4 pl-2 rounded-md sm:w-28 md:w-32'
           onChange={(e) => {
             setSortBy((prev) => {
               return (
