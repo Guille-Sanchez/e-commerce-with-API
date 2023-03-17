@@ -20,7 +20,7 @@ function App (): JSX.Element {
 
         {showCart && <Cart setConfirmedCheckout={setConfirmedCheckout} setShowCart={setShowCart}/>}
 
-        <main className='bg-indigo-900 min-w-full min-h-full font'>
+        <main className='bg-indigo-900 min-h-full min-w-full'>
           <SortContextProvider>
             <div className='pr-5 pl-5 sm:grid sm:grid-cols-2 sm:gap-5 pb-5'>
               <CategoryForm />

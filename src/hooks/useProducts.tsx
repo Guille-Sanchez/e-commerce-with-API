@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { eCommerceItems } from '../mockups/eCommerceItems'
+import { getProducts } from '../services/getProducts'
 import { type eCommerceItemsType, type eCommerceProductsState } from '../types.d'
 
 export const useProducts = (): eCommerceProductsState => {
@@ -9,8 +9,7 @@ export const useProducts = (): eCommerceProductsState => {
     let subscribed = true
 
     if (subscribed) {
-      // Get value from API
-      setEcommerceProducts(() => [...eCommerceItems])
+      getProducts({ setEcommerceProducts })
     }
 
     return () => {
